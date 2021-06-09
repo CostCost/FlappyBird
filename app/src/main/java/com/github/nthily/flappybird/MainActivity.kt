@@ -134,7 +134,7 @@ fun GameUI(game:Game){
             painter = painterResource(id = R.drawable.bird),
             contentDescription = null,
             modifier = Modifier
-                .border(2.dp, Color.Gray)
+                .size(width = game.bird.width, height = game.bird.height)
                 .layout { measurable, constraints ->
                     val placeable = measurable.measure(constraints)
                     game.bird.height = placeable.measuredHeight.toDp()
@@ -142,8 +142,7 @@ fun GameUI(game:Game){
                     layout(placeable.width, placeable.height) {
                         placeable.placeRelative(0, 0)
                     }
-                }
-                .size(width = game.bird.width, height = game.bird.height),
+                },
             contentScale = ContentScale.FillBounds
         )
     }
@@ -167,8 +166,7 @@ fun GameUI(game:Game){
                     painter = painterResource(id = R.drawable.pipedown),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(width = pipe.width, height = pipe.pipeDownHeight)
-                        .border(2.dp, Color.Red),
+                        .size(width = pipe.width, height = pipe.pipeDownHeight),
                     contentScale = ContentScale.FillBounds
                 )
             }
@@ -184,8 +182,7 @@ fun GameUI(game:Game){
                     painter = painterResource(id = R.drawable.pipeup),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(width = pipe.width, height = pipe.pipeUpHeight)
-                        .border(2.dp, Color.Red),
+                        .size(width = pipe.width, height = pipe.pipeUpHeight),
                     contentScale = ContentScale.FillBounds
                 )
             }

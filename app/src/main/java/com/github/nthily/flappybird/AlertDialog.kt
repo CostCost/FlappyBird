@@ -21,7 +21,7 @@ fun OverAlert(game: Game){
 
 
 
-    AnimatedVisibility(game.gameState == GameState.Over){
+    if(game.gameState == GameState.Over){
         /*
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -58,7 +58,6 @@ fun OverAlert(game: Game){
                 TextButton(
                     onClick = {
                         game.restartGame()
-                        game.score = 0
                     },
                 ) {
                     Text(

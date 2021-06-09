@@ -82,9 +82,10 @@ class Game {
     }
 
     fun restartGame(){
-        bird.y = 0f
         gameState = GameState.Unstarted
+        bird.y = 0f
         pipe.clear()
+        score = 0
         addPipe()
     }
 
