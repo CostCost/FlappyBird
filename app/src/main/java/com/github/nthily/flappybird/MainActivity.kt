@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,6 +41,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -52,6 +54,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun GameUI(game:Game){
 
@@ -106,8 +109,10 @@ fun GameUI(game:Game){
                 interactionSource = interactionSource,
                 indication = null
             ) {
-                game.gameState = GameState.Running
-                game.birdState = BirdState.Jumping
+                if(game.gameState != GameState.Over){
+                    game.gameState = GameState.Running
+                    game.birdState = BirdState.Jumping
+                }
             }
             .offset(
                 y = when(game.gameState){
@@ -150,38 +155,40 @@ fun GameUI(game:Game){
         val pipeDownX by animateFloatAsState(pipe.pipeDownX, tween(150, easing = LinearEasing))
         val pipeUpX by animateFloatAsState(pipe.pipeUpX, tween(150, easing = LinearEasing))
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .offset(x = pipeDownX.dp),
-            contentAlignment = Alignment.TopEnd
-        ){
-            Image(
-                painter = painterResource(id = R.drawable.pipedown),
-                contentDescription = null,
+        if(game.gameState == GameState.Running || game.gameState == GameState.Over){
+            Box(
                 modifier = Modifier
-                    .size(width = pipe.width, height = pipe.pipeDownHeight)
-                    .border(2.dp, Color.Red),
-                contentScale = ContentScale.FillBounds
-            )
-        }
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .offset(x = pipeDownX.dp),
+                contentAlignment = Alignment.TopEnd
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.pipedown),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(width = pipe.width, height = pipe.pipeDownHeight)
+                        .border(2.dp, Color.Red),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .offset(x = pipeUpX.dp),
-            contentAlignment = Alignment.BottomEnd
-        ){
-            Image(
-                painter = painterResource(id = R.drawable.pipeup),
-                contentDescription = null,
+            Box(
                 modifier = Modifier
-                    .size(width = pipe.width, height = pipe.pipeUpHeight)
-                    .border(2.dp, Color.Red),
-                contentScale = ContentScale.FillBounds
-            )
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .offset(x = pipeUpX.dp),
+                contentAlignment = Alignment.BottomEnd
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.pipeup),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(width = pipe.width, height = pipe.pipeUpHeight)
+                        .border(2.dp, Color.Red),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
         }
     }
     Box(

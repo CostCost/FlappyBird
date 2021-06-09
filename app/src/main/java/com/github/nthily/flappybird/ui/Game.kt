@@ -69,8 +69,13 @@ class Game {
                 }
 
             }
-        } else if(gameState == GameState.Over){
+        }
+        if(gameState == GameState.Over){
             bird.y = gameObject.limitHeight.value / 2 - bird.height.value / 2
+            pipe.forEach {
+                it.pipeDownX = 0f
+                it.pipeUpX = 0f
+            }
         }
 
         if(bird.y.dp - bird.height / 2  >= gameObject.limitHeight / 2) {
