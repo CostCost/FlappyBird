@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FlappyBirdTheme {
                 val game by remember{ mutableStateOf(Game()) }
-                game.addPipe()
+                game.restartGame()
                 GameUI(game)
             }
         }
@@ -147,7 +147,6 @@ fun GameUI(game:Game){
         )
     }
 
-
     // 柱子
     game.pipe.forEach{ pipe ->
 
@@ -188,21 +187,8 @@ fun GameUI(game:Game){
             }
         }
     }
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 50.dp),
-        contentAlignment = Alignment.TopCenter
-    ){
-        Text(
-            text = game.score.toString(),
-            style = MaterialTheme.typography.h3,
-            fontWeight = FontWeight.W700,
-            fontFamily = FontFamily(
-                Font(R.font.fb, FontWeight.W700)
-            )
-        )
-    }
+
+    Score(game)
     OverAlert(game)
 
 }

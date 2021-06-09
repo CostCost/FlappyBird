@@ -60,19 +60,21 @@ class Game {
                     gameState = GameState.Over
                 }
 
-                if(-pipe.pipeDownX.dp >= gameObject.limitWidth) {
+                if(-pipe.pipeDownX.dp - pipe.width / 2 >= gameObject.limitWidth) {
                     remove()
                 }
 
-                if((-pipe.pipeDownX.dp) >= gameObject.limitWidth / 2 + bird.width / 2 && !pipe.isCounted){
-                    score += 1
+                if((-pipe.pipeDownX.dp) >= gameObject.limitWidth / 2 + bird.width && !pipe.isCounted){
+                    Log.d(TAG, "index: $index score is $score and ${pipe.isCounted}")
                     pipe.isCounted = true
+                    score += 1
+                    Log.d(TAG, "index: $index score is $score and ${pipe.isCounted}")
                 }
 
             }
         }
         if(gameState == GameState.Over){
-            bird.y = gameObject.limitHeight.value / 2 - bird.height.value / 2
+            //bird.y = 0f
         }
 
         if(bird.y.dp - bird.height / 2  >= gameObject.limitHeight / 2) {
