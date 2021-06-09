@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
@@ -14,6 +15,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,9 +48,27 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FlappyBirdTheme {
+                val viewModel = hiltViewModel<UiState>()
                 val game by remember{ mutableStateOf(Game()) }
                 game.restartGame()
-                GameUI(game)
+
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text("FlappyBird")
+                            },
+                            actions = {
+                                IconButton(onClick = { if(viewModel.type == 0) viewModel.type = 1  else viewModel.type = 0}) {
+                                    Icon(painterResource(id = R.drawable.image), null)
+                                }
+                            },
+                            backgroundColor = Color(0xFF0079D3)
+                        )
+                    }
+                ){
+                    GameUI(game)
+                }
             }
         }
     }
@@ -58,6 +78,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GameUI(game:Game){
 
+
+    val viewModel = hiltViewModel<UiState>()
 
     LaunchedEffect(Unit) {
         while (true) {
@@ -98,7 +120,11 @@ fun GameUI(game:Game){
         )
     )
 
-    Background()
+    Crossfade(targetState = viewModel.type) {
+        if(it == 0){
+            Background(R.drawable.bkg)
+        } else Background(R.drawable.bkg2)
+    }
 
     Box(
         modifier = Modifier

@@ -14,13 +14,5 @@ import javax.inject.Inject
 class UiState @Inject constructor()
     : ViewModel() {
 
-    var gameing by mutableStateOf(false)
-
-    var jumpHeight by mutableStateOf(0.dp)
-
-    var maxHeight by mutableStateOf(0.dp)
-
-    var downToTheBottomValue by mutableStateOf(1f)
-
-    var flying by mutableStateOf(false)
+        var type by mutableStateOf(0)
 }

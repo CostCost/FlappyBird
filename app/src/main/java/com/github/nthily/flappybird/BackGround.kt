@@ -9,6 +9,8 @@ import androidx.compose.ui.res.painterResource
 
 
 @Composable
-fun Background(){
-    Image(painterResource(id = R.drawable.bkg), contentDescription = null, modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+fun Background(
+    img: Int
+){
+    Image(painterResource(id = img), contentDescription = null, modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
 }

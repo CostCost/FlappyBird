@@ -30,7 +30,6 @@ class Game {
     var score by mutableStateOf(0)
 
     fun update(time:Long){
-        // 鸟儿下落
 
         if(gameState == GameState.Running){
             when(birdState){
@@ -47,12 +46,15 @@ class Game {
                 pipe.pipeDownX -= 2f
                 pipe.pipeUpX -= 2f
 
+                // Up layer detection
                 if(pipe.pipeDownHeight.value >= gameObject.limitHeight.value / 2 + bird.y.dp.value &&
                     (-pipe.pipeDownX.dp) + pipe.width / 2 >= gameObject.limitWidth / 2 - bird.width / 2 &&
                     (-pipe.pipeDownX.dp) <= gameObject.limitWidth / 2 + bird.width / 2
                 ){
                     gameState = GameState.Over
                 }
+
+                // Down layer detection
                 if(pipe.pipeUpHeight.value >= gameObject.limitHeight.value / 2 - bird.y.dp.value &&
                     (-pipe.pipeUpX.dp) + pipe.width / 2 >= gameObject.limitWidth / 2 - bird.width / 2 &&
                     (-pipe.pipeUpX.dp) <= gameObject.limitWidth / 2 + bird.width / 2
@@ -60,10 +62,17 @@ class Game {
                     gameState = GameState.Over
                 }
 
+                // if the bird has reached the bottom
+                if(bird.y.dp - bird.height / 2  >= gameObject.limitHeight / 2) {
+                    gameState = GameState.Over
+                }
+
+                // TODO: If a pipe has crossed the screen, generate a new
                 if(-pipe.pipeDownX.dp - pipe.width / 2 >= gameObject.limitWidth) {
                     remove()
                 }
 
+                // if the bird has crossed a pipe
                 if((-pipe.pipeDownX.dp) >= gameObject.limitWidth / 2 + bird.width && !pipe.isCounted){
                     pipe.isCounted = true
                     score += 1
@@ -73,10 +82,6 @@ class Game {
         }
         if(gameState == GameState.Over){
             //bird.y = 0f
-        }
-
-        if(bird.y.dp - bird.height / 2  >= gameObject.limitHeight / 2) {
-            gameState = GameState.Over
         }
 
     }
