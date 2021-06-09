@@ -71,22 +71,20 @@ fun GameUI(game:Game){
     val interactionSource = remember { MutableInteractionSource() }
 
     // 未开始游戏前的上下动画
-    val infiniteTransition = rememberInfiniteTransition()
-    val unStartedAnimation by infiniteTransition.animateValue(
-        initialValue = 0.dp,
+
+    val unStartedAnimation by animateFloatAsState(
         targetValue = when(game.birdState){
-            BirdState.Jumping -> 15.dp
-            BirdState.Falling -> (-15).dp
+            BirdState.Jumping -> 25f
+            BirdState.Falling -> (-25f)
         },
-        typeConverter = Dp.VectorConverter,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 450),
-            repeatMode = RepeatMode.Reverse
-        )
+        tween(500)
     )
 
+
     if(game.gameState == GameState.Unstarted){
-        if(unStartedAnimation == (-15).dp) game.birdState = BirdState.Jumping else game.birdState = BirdState.Falling
+        if(unStartedAnimation == -25f) {
+            game.birdState = BirdState.Jumping
+        } else if(unStartedAnimation == 25f)game.birdState = BirdState.Falling
     }
 
 
@@ -109,14 +107,14 @@ fun GameUI(game:Game){
                 interactionSource = interactionSource,
                 indication = null
             ) {
-                if(game.gameState != GameState.Over){
+                if (game.gameState != GameState.Over) {
                     game.gameState = GameState.Running
                     game.birdState = BirdState.Jumping
                 }
             }
             .offset(
-                y = when(game.gameState){
-                    GameState.Unstarted -> unStartedAnimation
+                y = when (game.gameState) {
+                    GameState.Unstarted -> unStartedAnimation.dp
                     else -> birdPosition.dp
                 }
             )
