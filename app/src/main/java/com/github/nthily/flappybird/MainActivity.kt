@@ -134,7 +134,6 @@ fun GameUI(game:Game){
             painter = painterResource(id = R.drawable.bird),
             contentDescription = null,
             modifier = Modifier
-                .size(width = 58.dp, height = 41.dp)
                 .border(2.dp, Color.Gray)
                 .layout { measurable, constraints ->
                     val placeable = measurable.measure(constraints)
@@ -143,7 +142,8 @@ fun GameUI(game:Game){
                     layout(placeable.width, placeable.height) {
                         placeable.placeRelative(0, 0)
                     }
-                },
+                }
+                .size(width = game.bird.width, height = game.bird.height),
             contentScale = ContentScale.FillBounds
         )
     }

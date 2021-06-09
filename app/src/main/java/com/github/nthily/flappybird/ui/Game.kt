@@ -1,6 +1,7 @@
 package com.github.nthily.flappybird.ui
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,13 +48,13 @@ class Game {
                 pipe.pipeUpX -= 2f
 
                 if(pipe.pipeDownHeight.value >= gameObject.limitHeight.value / 2 + bird.y.dp.value &&
-                    (-pipe.pipeDownX.dp) >= gameObject.limitWidth / 2 - bird.width &&
+                    (-pipe.pipeDownX.dp) + pipe.width / 2 >= gameObject.limitWidth / 2 - bird.width / 2 &&
                     (-pipe.pipeDownX.dp) <= gameObject.limitWidth / 2 + bird.width / 2
                 ){
                     gameState = GameState.Over
                 }
                 if(pipe.pipeUpHeight.value >= gameObject.limitHeight.value / 2 - bird.y.dp.value &&
-                    (-pipe.pipeUpX.dp) >= gameObject.limitWidth / 2 - bird.width &&
+                    (-pipe.pipeUpX.dp) + pipe.width / 2 >= gameObject.limitWidth / 2 - bird.width / 2 &&
                     (-pipe.pipeUpX.dp) <= gameObject.limitWidth / 2 + bird.width / 2
                 ){
                     gameState = GameState.Over
@@ -72,10 +73,6 @@ class Game {
         }
         if(gameState == GameState.Over){
             bird.y = gameObject.limitHeight.value / 2 - bird.height.value / 2
-            pipe.forEach {
-                it.pipeDownX = 0f
-                it.pipeUpX = 0f
-            }
         }
 
         if(bird.y.dp - bird.height / 2  >= gameObject.limitHeight / 2) {
@@ -100,7 +97,9 @@ class Game {
 
     private fun randomHeight(): Pair<Float, Float> {
 
-        val totalHeight = gameObject.limitHeight.value.toInt() - (bird.height.value * 4).toInt()
+        var totalHeight = 0
+
+        if(gameObject.limitHeight != 0.dp) totalHeight = gameObject.limitHeight.value.toInt() - (bird.height.value * 4).toInt()
 
         val value = Random.nextInt(0..totalHeight)
             .toFloat()
