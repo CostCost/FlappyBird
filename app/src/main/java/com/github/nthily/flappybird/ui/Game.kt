@@ -65,10 +65,8 @@ class Game {
                 }
 
                 if((-pipe.pipeDownX.dp) >= gameObject.limitWidth / 2 + bird.width && !pipe.isCounted){
-                    Log.d(TAG, "index: $index score is $score and ${pipe.isCounted}")
                     pipe.isCounted = true
                     score += 1
-                    Log.d(TAG, "index: $index score is $score and ${pipe.isCounted}")
                 }
 
             }
