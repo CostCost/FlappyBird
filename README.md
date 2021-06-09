@@ -1,5 +1,5 @@
 ## FlappyBird
 
-Flappy Bird made with Jetpack Compose
+FlappyBird made with Jetpack Compose
 
 ![](demo2.png)
