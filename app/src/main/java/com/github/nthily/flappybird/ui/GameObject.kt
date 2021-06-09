@@ -10,7 +10,7 @@ class GameObject {
 
     val jumpDistance = 130f
 
-    var limitHeight by mutableStateOf(0.dp)
-    var limitWidth by mutableStateOf(0.dp)
+    var screenHeight by mutableStateOf(0.dp)
+    var screenWidth by mutableStateOf(0.dp)
 
 }

@@ -1,8 +1,5 @@
 package com.github.nthily.flappybird.ui
 
-import android.content.ContentValues
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -47,33 +44,33 @@ class Game {
                 pipe.pipeUpX -= 2f
 
                 // Up layer detection
-                if(pipe.pipeDownHeight.value >= gameObject.limitHeight.value / 2 + bird.y.dp.value &&
-                    (-pipe.pipeDownX.dp) + pipe.width / 2 >= gameObject.limitWidth / 2 - bird.width / 2 &&
-                    (-pipe.pipeDownX.dp) <= gameObject.limitWidth / 2 + bird.width / 2
+                if(pipe.pipeDownHeight.value >= gameObject.screenHeight.value / 2 + bird.y.dp.value &&
+                    (-pipe.pipeDownX.dp) + pipe.width / 2 >= gameObject.screenWidth / 2 - bird.width / 2 &&
+                    (-pipe.pipeDownX.dp) <= gameObject.screenWidth / 2 + bird.width / 2
                 ){
                     gameState = GameState.Over
                 }
 
                 // Down layer detection
-                if(pipe.pipeUpHeight.value >= gameObject.limitHeight.value / 2 - bird.y.dp.value &&
-                    (-pipe.pipeUpX.dp) + pipe.width / 2 >= gameObject.limitWidth / 2 - bird.width / 2 &&
-                    (-pipe.pipeUpX.dp) <= gameObject.limitWidth / 2 + bird.width / 2
+                if(pipe.pipeUpHeight.value >= gameObject.screenHeight.value / 2 - bird.y.dp.value &&
+                    (-pipe.pipeUpX.dp) + pipe.width / 2 >= gameObject.screenWidth / 2 - bird.width / 2 &&
+                    (-pipe.pipeUpX.dp) <= gameObject.screenWidth / 2 + bird.width / 2
                 ){
                     gameState = GameState.Over
                 }
 
                 // if the bird has reached the bottom
-                if(bird.y.dp - bird.height / 2  >= gameObject.limitHeight / 2) {
+                if(bird.y.dp - bird.height / 2  >= gameObject.screenHeight / 2) {
                     gameState = GameState.Over
                 }
 
                 // TODO: If a pipe has crossed the screen, generate a new
-                if(-pipe.pipeDownX.dp - pipe.width / 2 >= gameObject.limitWidth) {
+                if(-pipe.pipeDownX.dp - pipe.width / 2 >= gameObject.screenWidth) {
                     remove()
                 }
 
                 // if the bird has crossed a pipe
-                if((-pipe.pipeDownX.dp) >= gameObject.limitWidth / 2 + bird.width && !pipe.isCounted){
+                if((-pipe.pipeDownX.dp) >= gameObject.screenWidth / 2 + bird.width && !pipe.isCounted){
                     pipe.isCounted = true
                     score += 1
                 }
@@ -105,7 +102,7 @@ class Game {
 
         var totalHeight = 0
 
-        if(gameObject.limitHeight != 0.dp) totalHeight = gameObject.limitHeight.value.toInt() - (bird.height.value * 4).toInt()
+        if(gameObject.screenHeight != 0.dp) totalHeight = gameObject.screenHeight.value.toInt() - (bird.height.value * 4).toInt()
 
         val value = Random.nextInt(0..totalHeight)
             .toFloat()

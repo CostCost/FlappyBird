@@ -1,46 +1,29 @@
 package com.github.nthily.flappybird
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.github.nthily.flappybird.ui.Bird
 import com.github.nthily.flappybird.ui.BirdState
 import com.github.nthily.flappybird.ui.Game
 import com.github.nthily.flappybird.ui.GameState
 import com.github.nthily.flappybird.ui.theme.FlappyBirdTheme
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     @ExperimentalAnimationApi
@@ -146,8 +129,8 @@ fun GameUI(game:Game){
             )
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
-                game.gameObject.limitHeight = placeable.measuredHeight.toDp()
-                game.gameObject.limitWidth = placeable.measuredWidth.toDp()
+                game.gameObject.screenHeight = placeable.measuredHeight.toDp()
+                game.gameObject.screenWidth = placeable.measuredWidth.toDp()
                 layout(placeable.width, placeable.height) {
                     placeable.placeRelative(0, 0)
                 }
