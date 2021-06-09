@@ -1,4 +1,4 @@
-## FlappyBird
+## FlappyBird (Unfinished)
 
 FlappyBird made with Jetpack Compose
 
