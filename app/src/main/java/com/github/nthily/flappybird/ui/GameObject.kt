@@ -13,4 +13,5 @@ class GameObject {
     var screenHeight by mutableStateOf(0.dp)
     var screenWidth by mutableStateOf(0.dp)
 
+    var requestAdd by mutableStateOf(false)
 }

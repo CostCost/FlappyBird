@@ -66,15 +66,20 @@ class Game {
 
                 // TODO: If a pipe has crossed the screen, generate a new
                 if(-pipe.pipeDownX.dp - pipe.width / 2 >= gameObject.screenWidth) {
-                    remove()
+                    //remove()
                 }
 
                 // if the bird has crossed a pipe
                 if((-pipe.pipeDownX.dp) >= gameObject.screenWidth / 2 + bird.width && !pipe.isCounted){
                     pipe.isCounted = true
                     score += 1
+                    gameObject.requestAdd = true
                 }
 
+            }
+            if(gameObject.requestAdd){
+                addPipe()
+                gameObject.requestAdd = false
             }
         }
         if(gameState == GameState.Over){
@@ -90,14 +95,6 @@ class Game {
         score = 0
         addPipe()
     }
-
-    private fun remove(){
-        while(pipe.iterator().hasNext()){
-            pipe.remove()
-        }
-        addPipe()
-    }
-
     private fun randomHeight(): Pair<Float, Float> {
 
         var totalHeight = 0
@@ -111,7 +108,7 @@ class Game {
     }
 
 
-    fun addPipe(){
+    private fun addPipe(){
         val height = randomHeight()
         pipe.add(Pipe(height.first.dp, height.second.dp))
     }
