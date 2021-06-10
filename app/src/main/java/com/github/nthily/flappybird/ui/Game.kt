@@ -45,7 +45,7 @@ class Game {
 
                 // Up layer detection
                 if(pipe.pipeDownHeight.value >= gameObject.screenHeight.value / 2 + bird.y.dp.value &&
-                    (-pipe.pipeDownX.dp) + pipe.width / 2 >= gameObject.screenWidth / 2 - bird.width / 2 &&
+                    (-pipe.pipeDownX.dp) + pipe.width >= gameObject.screenWidth / 2 - bird.width / 2 &&
                     (-pipe.pipeDownX.dp) <= gameObject.screenWidth / 2 + bird.width / 2
                 ){
                     gameState = GameState.Over
@@ -53,7 +53,7 @@ class Game {
 
                 // Down layer detection
                 if(pipe.pipeUpHeight.value >= gameObject.screenHeight.value / 2 - bird.y.dp.value &&
-                    (-pipe.pipeUpX.dp) + pipe.width / 2 >= gameObject.screenWidth / 2 - bird.width / 2 &&
+                    (-pipe.pipeUpX.dp) + pipe.width >= gameObject.screenWidth / 2 - bird.width / 2 &&
                     (-pipe.pipeUpX.dp) <= gameObject.screenWidth / 2 + bird.width / 2
                 ){
                     gameState = GameState.Over
