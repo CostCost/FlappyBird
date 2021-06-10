@@ -64,11 +64,6 @@ class Game {
                     gameState = GameState.Over
                 }
 
-                // TODO: If a pipe has crossed the screen, generate a new
-                if(-pipe.pipeDownX.dp - pipe.width / 2 >= gameObject.screenWidth) {
-                    //remove()
-                }
-
                 // if the bird has crossed a pipe
                 if((-pipe.pipeDownX.dp) >= gameObject.screenWidth / 2 + bird.width && !pipe.isCounted){
                     pipe.isCounted = true
