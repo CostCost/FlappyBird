@@ -1,4 +1,4 @@
-package com.github.nthily.flappybird.ui
+package com.github.nthily.flappybird.game
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

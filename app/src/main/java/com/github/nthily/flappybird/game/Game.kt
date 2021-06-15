@@ -4,6 +4,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import com.github.nthily.flappybird.game.GameObject
+import com.github.nthily.flappybird.game.Pipe
 import java.util.*
 import kotlin.random.Random
 import kotlin.random.nextInt
