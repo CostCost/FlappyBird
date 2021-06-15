@@ -1,18 +1,11 @@
 package com.github.nthily.flappybird
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import com.github.nthily.flappybird.ui.Game
-import com.github.nthily.flappybird.ui.GameState
+import com.github.nthily.flappybird.game.Game
+import com.github.nthily.flappybird.game.GameState
 
 @ExperimentalAnimationApi
 @Composable

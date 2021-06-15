@@ -1,4 +1,4 @@
-package com.github.nthily.flappybird.ui
+package com.github.nthily.flappybird.game
 
 import android.content.ContentValues.TAG
 import android.graphics.BitmapFactory

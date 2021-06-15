@@ -3,7 +3,6 @@ package com.github.nthily.flappybird
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.*
@@ -21,9 +20,9 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.github.nthily.flappybird.ui.BirdState
-import com.github.nthily.flappybird.ui.Game
-import com.github.nthily.flappybird.ui.GameState
+import com.github.nthily.flappybird.game.BirdState
+import com.github.nthily.flappybird.game.Game
+import com.github.nthily.flappybird.game.GameState
 import com.github.nthily.flappybird.ui.theme.FlappyBirdTheme
 
 class MainActivity : ComponentActivity() {
@@ -60,7 +59,7 @@ class MainActivity : ComponentActivity() {
 
 @ExperimentalAnimationApi
 @Composable
-fun GameUI(game:Game){
+fun GameUI(game: Game){
 
 
     val viewModel = hiltViewModel<UiState>()

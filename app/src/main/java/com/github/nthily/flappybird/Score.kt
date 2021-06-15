@@ -12,8 +12,8 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.github.nthily.flappybird.ui.Game
-import com.github.nthily.flappybird.ui.GameState
+import com.github.nthily.flappybird.game.Game
+import com.github.nthily.flappybird.game.GameState
 
 @Composable
 fun Score(game: Game){
