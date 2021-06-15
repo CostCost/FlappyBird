@@ -109,6 +109,46 @@ fun GameUI(game: Game){
         } else Background(R.drawable.bkg2)
     }
 
+    // 柱子
+    game.pipe.forEach{ pipe ->
+
+        val pipeDownX by animateFloatAsState(pipe.pipeDownX, tween(150, easing = LinearEasing))
+        val pipeUpX by animateFloatAsState(pipe.pipeUpX, tween(150, easing = LinearEasing))
+
+        if(game.gameState == GameState.Running || game.gameState == GameState.Over){
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .offset(x = pipeDownX.dp),
+                contentAlignment = Alignment.TopEnd
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.pipedown),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(width = pipe.width, height = pipe.pipeDownHeight),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .offset(x = pipeUpX.dp),
+                contentAlignment = Alignment.BottomEnd
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.pipeup),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(width = pipe.width, height = pipe.pipeUpHeight),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
+        }
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -152,47 +192,6 @@ fun GameUI(game: Game){
                 },
             contentScale = ContentScale.FillBounds
         )
-    }
-
-    // 柱子
-    game.pipe.forEach{ pipe ->
-
-        val pipeDownX by animateFloatAsState(pipe.pipeDownX, tween(150, easing = LinearEasing))
-        val pipeUpX by animateFloatAsState(pipe.pipeUpX, tween(150, easing = LinearEasing))
-
-        if(game.gameState == GameState.Running || game.gameState == GameState.Over){
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .offset(x = pipeDownX.dp),
-                contentAlignment = Alignment.TopEnd
-            ){
-                Image(
-                    painter = painterResource(id = R.drawable.pipedown),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(width = pipe.width, height = pipe.pipeDownHeight),
-                    contentScale = ContentScale.FillBounds
-                )
-            }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .offset(x = pipeUpX.dp),
-                contentAlignment = Alignment.BottomEnd
-            ){
-                Image(
-                    painter = painterResource(id = R.drawable.pipeup),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(width = pipe.width, height = pipe.pipeUpHeight),
-                    contentScale = ContentScale.FillBounds
-                )
-            }
-        }
     }
 
     Score(game)

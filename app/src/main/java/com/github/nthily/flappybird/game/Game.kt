@@ -78,7 +78,7 @@ class Game {
             }
         }
         if(gameState == GameState.Over){
-            //bird.y = 0f
+            bird.y = gameObject.screenHeight.value / 2 - bird.height.value / 2
         }
 
     }
